@@ -1,0 +1,32 @@
+# Data and outputs (not distributed in repo)
+data/*.csv
+data/*.json
+data/raw/
+data/processed/
+!data/README.md
+*.rds
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.Python
+.env
+.venv
+venv/
+ENV/
+
+# IDE and OS
+.idea/
+.vscode/
+.DS_Store
+*.log
+
+# Large or generated analysis outputs (optional: remove if you want to track small result CSVs)
+analysis/*.csv
+analysis/*.txt
+!analysis/multi_agent_schema.json
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb

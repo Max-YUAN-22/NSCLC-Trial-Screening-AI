@@ -1,0 +1,404 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "NSCLC 4-Agent Trial Pre-screening Output",
+  "type": "object",
+  "required": [
+    "protocol_agent",
+    "patient_agent",
+    "eligibility_agent",
+    "safety_agent"
+  ],
+  "properties": {
+    "protocol_agent": {
+      "type": "object",
+      "required": [
+        "trial_id",
+        "trial_requirements",
+        "high_risk_exclusions",
+        "ambiguities"
+      ],
+      "properties": {
+        "trial_id": {
+          "type": "string"
+        },
+        "trial_requirements": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "requirement_id",
+              "dimension",
+              "text",
+              "hard_constraint",
+              "operator",
+              "value"
+            ],
+            "properties": {
+              "requirement_id": {
+                "type": "string"
+              },
+              "dimension": {
+                "type": "string",
+                "enum": [
+                  "stage",
+                  "histology",
+                  "ecog",
+                  "drivers",
+                  "prior_lines",
+                  "age_sex",
+                  "other"
+                ]
+              },
+              "text": {
+                "type": "string"
+              },
+              "hard_constraint": {
+                "type": "boolean"
+              },
+              "operator": {
+                "type": "string",
+                "enum": [
+                  "eq",
+                  "in",
+                  "lte",
+                  "gte",
+                  "contains",
+                  "not_allowed",
+                  "required"
+                ]
+              },
+              "value": {}
+            }
+          }
+        },
+        "high_risk_exclusions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "exclusion_id",
+              "category",
+              "text"
+            ],
+            "properties": {
+              "exclusion_id": {
+                "type": "string"
+              },
+              "category": {
+                "type": "string",
+                "enum": [
+                  "CNS",
+                  "ILD",
+                  "toxicity",
+                  "prior_exposure",
+                  "cardiac",
+                  "hepatic",
+                  "other"
+                ]
+              },
+              "text": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "ambiguities": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "patient_agent": {
+      "type": "object",
+      "required": [
+        "patient_id",
+        "patient_evidence"
+      ],
+      "properties": {
+        "patient_id": {
+          "type": "string"
+        },
+        "patient_evidence": {
+          "type": "object",
+          "required": [
+            "stage",
+            "ecog",
+            "drivers",
+            "prior_lines",
+            "cns",
+            "toxicity",
+            "missing_fields"
+          ],
+          "properties": {
+            "stage": {
+              "type": "object",
+              "required": [
+                "value",
+                "evidence"
+              ],
+              "properties": {
+                "value": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "evidence": {
+                  "type": "string"
+                }
+              }
+            },
+            "ecog": {
+              "type": "object",
+              "required": [
+                "value",
+                "evidence"
+              ],
+              "properties": {
+                "value": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "evidence": {
+                  "type": "string"
+                }
+              }
+            },
+            "drivers": {
+              "type": "object",
+              "required": [
+                "EGFR",
+                "ALK",
+                "ROS1",
+                "RET",
+                "KRAS_G12C",
+                "HER2",
+                "METex14",
+                "BRAF_V600"
+              ],
+              "properties": {
+                "EGFR": {
+                  "type": "string",
+                  "enum": [
+                    "pos",
+                    "neg",
+                    "unknown"
+                  ]
+                },
+                "ALK": {
+                  "type": "string",
+                  "enum": [
+                    "pos",
+                    "neg",
+                    "unknown"
+                  ]
+                },
+                "ROS1": {
+                  "type": "string",
+                  "enum": [
+                    "pos",
+                    "neg",
+                    "unknown"
+                  ]
+                },
+                "RET": {
+                  "type": "string",
+                  "enum": [
+                    "pos",
+                    "neg",
+                    "unknown"
+                  ]
+                },
+                "KRAS_G12C": {
+                  "type": "string",
+                  "enum": [
+                    "pos",
+                    "neg",
+                    "unknown"
+                  ]
+                },
+                "HER2": {
+                  "type": "string",
+                  "enum": [
+                    "pos",
+                    "neg",
+                    "unknown"
+                  ]
+                },
+                "METex14": {
+                  "type": "string",
+                  "enum": [
+                    "pos",
+                    "neg",
+                    "unknown"
+                  ]
+                },
+                "BRAF_V600": {
+                  "type": "string",
+                  "enum": [
+                    "pos",
+                    "neg",
+                    "unknown"
+                  ]
+                }
+              }
+            },
+            "prior_lines": {
+              "type": "object",
+              "required": [
+                "summary",
+                "line_count_estimate",
+                "systemic_pretreated"
+              ],
+              "properties": {
+                "summary": {
+                  "type": "string"
+                },
+                "line_count_estimate": {
+                  "type": [
+                    "integer",
+                    "null"
+                  ]
+                },
+                "systemic_pretreated": {
+                  "type": "boolean"
+                }
+              }
+            },
+            "cns": {
+              "type": "object",
+              "required": [
+                "status",
+                "evidence"
+              ],
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "enum": [
+                    "active",
+                    "treated_stable",
+                    "none",
+                    "unknown"
+                  ]
+                },
+                "evidence": {
+                  "type": "string"
+                }
+              }
+            },
+            "toxicity": {
+              "type": "object",
+              "required": [
+                "flags",
+                "evidence"
+              ],
+              "properties": {
+                "flags": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "evidence": {
+                  "type": "string"
+                }
+              }
+            },
+            "missing_fields": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "eligibility_agent": {
+      "type": "object",
+      "required": [
+        "criterion_judgments",
+        "overall_label_initial",
+        "supporting_evidence"
+      ],
+      "properties": {
+        "criterion_judgments": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "requirement_id",
+              "dimension",
+              "status",
+              "reason"
+            ],
+            "properties": {
+              "requirement_id": {
+                "type": "string"
+              },
+              "dimension": {
+                "type": "string"
+              },
+              "status": {
+                "type": "string",
+                "enum": [
+                  "met",
+                  "not_met",
+                  "insufficient"
+                ]
+              },
+              "reason": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "overall_label_initial": {
+          "type": "string",
+          "enum": [
+            "eligible",
+            "ineligible",
+            "uncertain"
+          ]
+        },
+        "supporting_evidence": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "safety_agent": {
+      "type": "object",
+      "required": [
+        "override_applied",
+        "override_reason",
+        "overall_label_final"
+      ],
+      "properties": {
+        "override_applied": {
+          "type": "boolean"
+        },
+        "override_reason": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "overall_label_final": {
+          "type": "string",
+          "enum": [
+            "eligible",
+            "ineligible",
+            "uncertain"
+          ]
+        }
+      }
+    }
+  }
+}
